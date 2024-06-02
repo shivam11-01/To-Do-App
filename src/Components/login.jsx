@@ -3,6 +3,8 @@ import { Link, useNavigate } from "react-router-dom";
 
 export const Login = () => {
   const [name, setName] = useState("");
+  const [password, setpassword] = useState("");
+  const [error, seterror] = useState(false);
   const navigate = useNavigate();
   return (
     <div className="bg-white flex flex-row justify-center w-full">
@@ -36,7 +38,7 @@ export const Login = () => {
                   Login
                 </div>
                 <img
-                  className="relative w-[381px] h-[258.01px] ml-[-1.00px]"
+                  className="relative w-[381px] h-[200px] ml-[-1.00px]"
                   alt="Frame"
                   src="https://c.animaapp.com/hED8FcSK/img/frame-11.svg"
                 />
@@ -56,20 +58,47 @@ export const Login = () => {
                   />
                 </div>
 
+                <div className="absolute w-[450px] h-[54px] top-16 left-0 bg-white rounded-2xl overflow-hidden flex items-center">
+                  <img
+                    className="w-5 h-5 ml-6"
+                    alt="Frame"
+                    src="https://c.animaapp.com/hED8FcSK/img/frame.svg"
+                  />
+                  <input
+                    type="password"
+                    className="ml-4 w-[200px] h-5 bg-transparent border-none focus:shadow-none focus:outline-none text-[#735ff1] text-sm"
+                    placeholder="Enter your Password"
+                    onChange={(e) => setpassword(e.target.value)}
+                  />
+                </div>
                 <button
                   onClick={() => {
                     if (name == "") {
+                      seterror("Please enter name!");
                       return;
+                    } else {
+                      seterror("");
+                    }
+                    if (password !== "1234") {
+                      seterror("Password is invalid!");
+                      return;
+                    } else {
+                      seterror("");
                     }
                     localStorage.setItem("name", name);
                     navigate("/dashboard");
                   }}
-                  className="flex w-[222px] h-[52px] items-center justify-around gap-2.5 px-16 py-4 absolute top-[90px] left-[111px] rounded-2xl [background:linear-gradient(180deg,rgb(138,121,243)_0%,rgb(88,65,238)_100%)]"
+                  className="flex w-[222px] h-[52px] items-center justify-around gap-2.5 px-16 py-4 absolute top-[150px] left-[111px] rounded-2xl [background:linear-gradient(180deg,rgb(138,121,243)_0%,rgb(88,65,238)_100%)]"
                 >
                   <p className="relative w-[94px] h-4 [font-family:'Spartan',Helvetica] font-semibold text-white text-base tracking-[0] leading-[normal] whitespace-nowrap">
                     Login Now
                   </p>
                 </button>
+                {error && (
+                  <p className="relative top-28 mt-2 text-center text-red-700">
+                    {error}
+                  </p>
+                )}
               </div>
             </div>
           </div>

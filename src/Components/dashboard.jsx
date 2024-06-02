@@ -61,6 +61,7 @@ const Dashboard = () => {
       }));
       setNewDesc(""); // Clear the new task description
       setNewTitle(""); // Clear the new task title
+      setOpen(!open);
     }
   };
 
@@ -151,7 +152,6 @@ const Dashboard = () => {
                 </h1>
               </div>
               <div className="inline-flex items-start gap-4 relative flex-[0_0_auto]">
-               
                 <button
                   id="dropdownUserAvatarButton"
                   data-dropdown-toggle="dropdownAvatar"
@@ -245,6 +245,17 @@ const Dashboard = () => {
                         className="w-full border-b-2 border-b-[#7f27ff] border-0 outline-none"
                         placeholder="New task description"
                       />
+                      <select
+                        disabled
+                        value={selectedCategory}
+                        // onChange={(e) => set(e.target.value)}
+                        className="w-full border-b-2 border-b-[#7f27ff] border-0 outline-none mt-2"
+                      >
+                        <option value="todo">To Do</option>
+                        <option value="inProgress">In Progress</option>
+                        <option value="inReview">In Review</option>
+                        <option value="completed">Completed</option>
+                      </select>
                       <button
                         onClick={handleAddTask}
                         className="w-full mt-2 py-2 bg-[#7f27ff] text-white rounded-lg"
@@ -255,7 +266,7 @@ const Dashboard = () => {
                   )}
                 </div>
               </div>
-              <div className="inline-flex flex-col items-start gap-4 relative flex-[0_0_auto] border-r-2 pr-5 min-w-min">
+              <div className="inline-flex flex-col-reverse items-start gap-4 relative flex-[0_0_auto] border-r-2 pr-5 min-w-min">
                 {tasks.todo.map((task) => {
                   return (
                     <div key={task.id}>
